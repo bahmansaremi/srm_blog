@@ -28,9 +28,13 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CategoryRequest $request)
+    public function store(UserController $request)
     {
-       Category::create(['title'=>$request->title]);
+       Category::create(
+           ['name'=>$request->title,
+            'email'=>$request->email,
+            'password'=>$request->password
+           ]);
        return redirect()->back();
     }
 
@@ -72,7 +76,8 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Category::find($id)->delete();
+        return redirect()->route('categories.index');
     }
 
     public function findCategory($id)

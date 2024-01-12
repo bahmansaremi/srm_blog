@@ -35,9 +35,13 @@
                                             <i class="now-ui-icons ui-2_settings-90"></i>
                                         </button>
                                     </a>
-                                    <button type="button" rel="tooltip" class="btn btn-danger btn-sm btn-icon">
-                                        <i class="now-ui-icons ui-1_simple-remove"></i>
-                                    </button>
+                                    <form class="d-inline-block" method="POST" action="{{route('categories.destroy', $category->id)}}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" rel="tooltip" class="btn btn-danger btn-sm btn-icon" onclick="return confirm('Are you sure you want to delete it?')">
+                                            <i class="now-ui-icons ui-1_simple-remove"></i>
+                                        </button>
+                                    </form>
                                 </td>
                             @endif
 
@@ -48,9 +52,9 @@
             </table>
         </div>
         <div class="col-sm-1"></div>
-        <div class="col-sm4">
+        <div class="col-sm-4 border rounded">
             <br>
-            <h2>Creat new category</h2>
+            <h2>Create new category</h2>
 
             <form method="POST" action="{{route('categories.store')}}">
                 @csrf
@@ -61,7 +65,7 @@
                         <span class="text-danger">{{$errors->first('title')}}</span>
                     @endif
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Add to list</button>
             </form>
         </div>
     </div>
